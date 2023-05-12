@@ -1,42 +1,49 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AlarmSystem : MonoBehaviour
 {
-    public float maxVolume = 1f;
-    public float fadeTime = 1f;
+    [SerializeField] private AudioSource _audioSource;
 
-    [SerializeField] private AudioSource audioSource;
-    private bool isInHouse = false;
-    private float targetVolume = 0f;
+    private float _maxVolume = 1f;
+    private float _fadeTime = 1f;
+    private Coroutine coroutine;
+    private float _targetVolume = 0f;
 
-    private void Start()
+    public void ActivateAlarm()
     {
-        //audioSource = GetComponent<AudioSource>();
+        _audioSource.Play();
+        SetVolume(_maxVolume);
+        StopCoroutine();
+        coroutine = StartCoroutine(VolumeChange());
     }
-    
-    private void OnTriggerEnter(Collider other)
+
+    public void DeactivateAlarm()
     {
-        if (other.tag == "Player")
+        SetVolume(0f);
+        StopCoroutine();
+        coroutine = StartCoroutine(VolumeChange());
+    }
+
+    private void SetVolume(float volume)
+    {
+        _targetVolume = volume;
+    }
+
+    private void StopCoroutine()
+    {
+        if (coroutine != null)
         {
-            audioSource.Play();
-            isInHouse = true;
-            targetVolume = maxVolume;
+            StopCoroutine(coroutine);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private IEnumerator VolumeChange()
     {
-        if (other.tag == "Player")
+        while (_targetVolume != _audioSource.volume)
         {
-            isInHouse = false;
-            targetVolume = 0f;
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _targetVolume, Time.deltaTime / _fadeTime);
+            yield return null;
         }
-    }
-
-    private void Update()
-    {
-        audioSource.volume = Mathf.MoveTowards(audioSource.volume, targetVolume, Time.deltaTime / fadeTime);
     }
 }
