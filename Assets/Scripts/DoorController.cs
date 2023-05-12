@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent (typeof(AlarmSystem))]
 public class DoorController : MonoBehaviour
 {
     private AlarmSystem _alarmSystem;

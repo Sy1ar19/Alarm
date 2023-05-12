@@ -907,9 +907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7695de1b669ddf141a8c444ba21d156a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVolume: 1
-  fadeTime: 1
-  audioSource: {fileID: 1921999195}
+  _audioSource: {fileID: 1921999195}
 --- !u!65 &1319297581
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -923,6 +921,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.85, y: 2.17, z: 5.93}
   m_Center: {x: -2.45, y: 0.74, z: -0.68}
+--- !u!114 &1319297584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319297576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9bf18c0b4bfebb4990b0f2cf61c2aac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1365825901
 GameObject:
   m_ObjectHideFlags: 0
